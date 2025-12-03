@@ -56,10 +56,17 @@ jobs:
       - name: Build Statistics Section
         run: pnpm --filter @monorepo/statistics-section build
 
+      - name: Prepare deployment
+        run: |
+          # Deploy to subdirectory matching the app name
+          # This allows multiple apps on the same GitHub Pages site
+          mkdir -p dist/statistics-section
+          cp -r apps/statistics-section/dist/* dist/statistics-section/
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "./apps/statistics-section/dist"
+          path: "./dist"
 
   deploy:
     needs: build

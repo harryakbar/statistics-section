@@ -56,10 +56,17 @@ jobs:
       - name: Build Hacker News Client
         run: pnpm --filter hacker-news-client build
 
+      - name: Prepare deployment
+        run: |
+          # Deploy to subdirectory matching the app name
+          # This allows multiple apps on the same GitHub Pages site
+          mkdir -p dist/hacker-news-client
+          cp -r apps/hacker-news-client/dist/* dist/hacker-news-client/
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "./apps/hacker-news-client/dist"
+          path: "./dist"
 
   deploy:
     needs: build

@@ -56,10 +56,17 @@ jobs:
       - name: Build {{APP_NAME}}
         run: pnpm --filter {{APP_PACKAGE_NAME}} build
 
+      - name: Prepare deployment
+        run: |
+          # Deploy to subdirectory matching the app name
+          # This allows multiple apps on the same GitHub Pages site
+          mkdir -p dist/{{APP_DIR}}
+          cp -r apps/{{APP_DIR}}/dist/* dist/{{APP_DIR}}/
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "./apps/{{APP_DIR}}/dist"
+          path: "./dist"
 
   deploy:
     needs: build
