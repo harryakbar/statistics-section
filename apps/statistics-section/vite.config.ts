@@ -5,5 +5,5 @@ import { defineConfig } from "vite";
 export default defineConfig({
   plugins: [react()],
 
-  base: "/monorepo-frontend/statistics-section/",
+  base: "/",
 });
