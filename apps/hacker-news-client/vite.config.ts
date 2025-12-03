@@ -4,5 +4,5 @@ import { defineConfig } from "vite";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: "/hacker-news-client/",
+  base: "/monorepo-frontend/hacker-news-client/",
 });
