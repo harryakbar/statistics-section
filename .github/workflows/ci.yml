@@ -75,4 +75,3 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy apps/hacker-news-client/dist --project-name=hacker-news-client
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-e240c001dfd45ac249a398abe951a2e7
