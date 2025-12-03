@@ -56,16 +56,6 @@ jobs:
       - name: Build
         run: pnpm build
 
-      # Deploy Testimonial Card
-      - name: Deploy Testimonial Card to Cloudflare Pages
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy apps/testimonial-card/dist --project-name=testimonial-card
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-
       # Deploy Statistics Section
       - name: Deploy Statistics Section to Cloudflare Pages
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
@@ -85,3 +75,4 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy apps/hacker-news-client/dist --project-name=hacker-news-client
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+e240c001dfd45ac249a398abe951a2e7
