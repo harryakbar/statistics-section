@@ -1,0 +1,87 @@
+name: Deploy Hacker News Client (Subdomain)
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "apps/hacker-news-client/**"
+      - ".github/workflows/hacker-news-client-subdomain.yml"
+      - "packages/**"
+      - "turbo.json"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          package_json_file: package.json
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> "$GITHUB_ENV"
+
+      - uses: actions/cache@v4
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - uses: actions/cache@v4
+        name: Turbo cache
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build Hacker News Client
+        run: pnpm --filter hacker-news-client build
+
+      - name: Prepare deployment
+        run: |
+          # For subdomain deployment, deploy to root
+          # Each app gets its own GitHub Pages environment
+          mkdir -p dist
+          cp -r apps/hacker-news-client/dist/* dist/
+          # List contents for debugging
+          echo "Deployment structure:"
+          find dist -type f -name "index.html" | head -5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "./dist"
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages-hacker-news-client
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

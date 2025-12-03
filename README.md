@@ -149,7 +149,28 @@ That's it! The app is now part of the monorepo and will be included in all works
 
 ## Deployment
 
-### Unified Deployment (Recommended)
+You have two deployment options:
+
+### Option 1: Subdirectory Deployment (Current)
+
+All apps deploy to the same GitHub Pages site at different paths:
+
+- `https://harryakbar.github.io/monorepo-frontend/statistics-section/`
+- `https://harryakbar.github.io/monorepo-frontend/hacker-news-client/`
+- `https://harryakbar.github.io/monorepo-frontend/testimonial-card/`
+
+### Option 2: Subdomain Deployment
+
+Each app deploys to its own subdomain:
+
+- `https://statistics.yourdomain.com`
+- `https://hacker-news.yourdomain.com`
+
+See [SUBDOMAIN_DEPLOYMENT.md](./SUBDOMAIN_DEPLOYMENT.md) for setup instructions.
+
+---
+
+### Unified Deployment (Recommended for Subdirectories)
 
 A single workflow (`deploy-all.yml`) builds and deploys **all apps together**. This ensures:
 
@@ -169,6 +190,7 @@ The unified workflow triggers on:
 
 - `https://harryakbar.github.io/monorepo-frontend/statistics-section/`
 - `https://harryakbar.github.io/monorepo-frontend/hacker-news-client/`
+- `https://harryakbar.github.io/monorepo-frontend/testimonial-card/`
 
 ### Individual App Deployment (Optional)
 
@@ -197,10 +219,11 @@ node scripts/create-workflow.js <app-directory-name>
 
 ## Scripts Reference
 
-| Command                                 | Description                             |
-| --------------------------------------- | --------------------------------------- |
-| `pnpm dev`                              | Run all apps in development mode        |
-| `pnpm build`                            | Build all apps                          |
-| `pnpm lint`                             | Lint all apps                           |
-| `pnpm apps:list`                        | List all apps in the monorepo           |
-| `node scripts/create-workflow.js <app>` | Generate deployment workflow for an app |
+| Command                                           | Description                               |
+| ------------------------------------------------- | ----------------------------------------- |
+| `pnpm dev`                                        | Run all apps in development mode          |
+| `pnpm build`                                      | Build all apps                            |
+| `pnpm lint`                                       | Lint all apps                             |
+| `pnpm apps:list`                                  | List all apps in the monorepo             |
+| `node scripts/create-workflow.js <app>`           | Generate subdirectory workflow for an app |
+| `node scripts/create-subdomain-workflow.js <app>` | Generate subdomain workflow for an app    |
