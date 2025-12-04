@@ -20,6 +20,7 @@
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",
+    "@vitest/ui": "^4.0.15",
     "jsdom": "^25.0.1",
     "prettier": "^3.0.0",
     "turbo": "^2.6.1",
