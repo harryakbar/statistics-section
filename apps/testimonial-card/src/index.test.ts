@@ -1,8 +1,8 @@
-import { render, screen } from '@testing-library/react';
-import { describe, it, expect } from 'vitest';
+import { screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
 
-describe('Testimonial Card', () => {
-  it('renders without crashing', () => {
+describe("Testimonial Card", () => {
+  it("renders without crashing", () => {
     document.body.innerHTML = `
       <div class="card">
         <div class="header">
@@ -14,9 +14,8 @@ describe('Testimonial Card', () => {
         <p>I've been searching for high-quality abstract images...</p>
       </div>
     `;
-    
-    expect(screen.getByText('Sarah Dole')).toBeInTheDocument();
-    expect(screen.getByText('@sarahdole')).toBeInTheDocument();
+
+    expect(screen.getByText("Sarah Dole")).toBeInTheDocument();
+    expect(screen.getByText("@sarahdole")).toBeInTheDocument();
   });
 });
-
