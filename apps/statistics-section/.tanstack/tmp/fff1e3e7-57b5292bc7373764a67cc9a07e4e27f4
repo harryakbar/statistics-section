@@ -1,9 +1,10 @@
+import { createFileRoute } from "@tanstack/react-router"
 import { useEffect, useState } from "react";
 import { Provider } from "react-redux";
-import "./App.css";
-import { store } from "./app/store";
-import HeroImage from "./assets/hero.png";
-import { AnimatedStatistic } from "./components/AnimatedStatistic";
+import "../App.css";
+import { store } from "../app/store";
+import HeroImage from "../assets/hero.png";
+import { AnimatedStatistic } from "../components/AnimatedStatistic";
 
 const API_URL =
   "https://www.greatfrontend.com/api/projects/challenges/statistics-metrics?latest=true";
@@ -13,7 +14,11 @@ type StatisticsData = {
   value: number;
 }[];
 
-function App() {
+export const Route = createFileRoute("/")({
+  component: Index,
+});
+
+function Index() {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<StatisticsData | null>(null);
   const [error, setError] = useState(null);
@@ -64,6 +69,7 @@ function App() {
           <div className="flex flex-col items-center gap-8 md:gap-12 lg:gap-16 self-stretch">
             <div className="flex flex-col lg:flex-row items-center gap-6 md:gap-8 self-stretch">
               <img
+                alt="hero"
                 src={HeroImage}
                 className="justify-center items-center md:w-full md:w-[400px] lg:w-[592px] h-auto md:h-[368px] lg:h-[544px] object-cover rounded-lg"
               />
@@ -130,5 +136,3 @@ function App() {
     </Provider>
   );
 }
-
-export default App;
