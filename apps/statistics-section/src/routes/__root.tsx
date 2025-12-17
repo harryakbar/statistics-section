@@ -1,11 +1,8 @@
 import { createRootRoute, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 
 const RootLayout = () => {
-  const navRef = useRef<HTMLDivElement | null>(null);
-  const [visible, setVisible] = useState(false);
-
   useEffect(() => {}, []);
 
   return (
