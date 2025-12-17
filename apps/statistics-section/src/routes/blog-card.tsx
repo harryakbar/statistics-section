@@ -8,7 +8,7 @@ export const Route = createFileRoute("/blog-card")({
 
 function BlogCard() {
   return (
-    <div className="bg-[linear-gradient(to_right,rgb(249,250,251),rgb(210,214,219))] min-h-screen flex items-center justify-center p-4">
+    <div className="bg-gradient-to-b from-[#F9FAFB] to-[#D2D6DB] min-h-screen flex items-center justify-center p-4">
       <div className="bg-white flex flex-col m-bottom-auto rounded-md shadow-md w-[21.25rem]">
         <img
           src={BlogCardImage}
