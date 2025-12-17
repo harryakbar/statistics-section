@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TestimonialCardRouteImport } from './routes/testimonial-card'
+import { Route as ProfileCardRouteImport } from './routes/profile-card'
 import { Route as BlogCardRouteImport } from './routes/blog-card'
 import { Route as IndexRouteImport } from './routes/index'
 
 const TestimonialCardRoute = TestimonialCardRouteImport.update({
   id: '/testimonial-card',
   path: '/testimonial-card',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileCardRoute = ProfileCardRouteImport.update({
+  id: '/profile-card',
+  path: '/profile-card',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogCardRoute = BlogCardRouteImport.update({
@@ -32,30 +38,34 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/blog-card': typeof BlogCardRoute
+  '/profile-card': typeof ProfileCardRoute
   '/testimonial-card': typeof TestimonialCardRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/blog-card': typeof BlogCardRoute
+  '/profile-card': typeof ProfileCardRoute
   '/testimonial-card': typeof TestimonialCardRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/blog-card': typeof BlogCardRoute
+  '/profile-card': typeof ProfileCardRoute
   '/testimonial-card': typeof TestimonialCardRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/blog-card' | '/testimonial-card'
+  fullPaths: '/' | '/blog-card' | '/profile-card' | '/testimonial-card'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/blog-card' | '/testimonial-card'
-  id: '__root__' | '/' | '/blog-card' | '/testimonial-card'
+  to: '/' | '/blog-card' | '/profile-card' | '/testimonial-card'
+  id: '__root__' | '/' | '/blog-card' | '/profile-card' | '/testimonial-card'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BlogCardRoute: typeof BlogCardRoute
+  ProfileCardRoute: typeof ProfileCardRoute
   TestimonialCardRoute: typeof TestimonialCardRoute
 }
 
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/testimonial-card'
       fullPath: '/testimonial-card'
       preLoaderRoute: typeof TestimonialCardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile-card': {
+      id: '/profile-card'
+      path: '/profile-card'
+      fullPath: '/profile-card'
+      preLoaderRoute: typeof ProfileCardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog-card': {
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BlogCardRoute: BlogCardRoute,
+  ProfileCardRoute: ProfileCardRoute,
   TestimonialCardRoute: TestimonialCardRoute,
 }
 export const routeTree = rootRouteImport
