@@ -34,7 +34,7 @@ function Index() {
 
         const jsonData = await data.json();
         setData(jsonData.data);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
         setError(error);
       } finally {
