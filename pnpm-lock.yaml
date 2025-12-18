@@ -42,7 +42,7 @@ importers:
         specifier: ^3.90.0
         version: 3.114.15
 
-  apps/hacker-news-client:
+  apps/gfe-apps:
     dependencies:
       '@reduxjs/toolkit':
         specifier: ^2.10.1
@@ -97,7 +97,7 @@ importers:
         specifier: ^7.2.2
         version: 7.2.6(@types/node@24.10.1)(tsx@4.21.0)
 
-  apps/statistics-section:
+  apps/gfe-marketing:
     dependencies:
       '@reduxjs/toolkit':
         specifier: ^2.10.1
@@ -244,12 +244,6 @@ importers:
         version: 8.48.1(eslint@9.39.1)(typescript@5.9.3)
       vite:
         specifier: ^7.2.4
-        version: 7.2.6(@types/node@24.10.1)(tsx@4.21.0)
-
-  apps/testimonial-card:
-    devDependencies:
-      vite:
-        specifier: ^7.1.7
         version: 7.2.6(@types/node@24.10.1)(tsx@4.21.0)
 
   packages/eslint-config:
